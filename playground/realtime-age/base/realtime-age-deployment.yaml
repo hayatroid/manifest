@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: caddy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: caddy
+  template:
+    metadata:
+      labels:
+        app: caddy
+    spec:
+      volumes:
+        - name: realtime-age-html
+          configMap:
+            name: realtime-age-html
+      containers:
+        - name: caddy
+          image: caddy:2
+          volumeMounts:
+            - mountPath: /usr/share/caddy
+              name: realtime-age-html

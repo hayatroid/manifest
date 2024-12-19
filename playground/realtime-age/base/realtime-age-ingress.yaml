@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: caddy
+  annotations:
+    # https://github.com/hayatroid/manifest/blob/main/cert-manager/base/cluster-issuer.yaml
+    cert-manager.io/cluster-issuer: cluster-issuer
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: play.hayatro.id
+      http:
+        paths:
+          - path: /realtime-age
+            pathType: Prefix
+            backend:
+              service:
+                name: caddy
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - play.hayatro.id
+      secretName: play-hayatro-id-tls

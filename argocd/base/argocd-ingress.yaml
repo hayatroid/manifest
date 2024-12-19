@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd
+  annotations:
+    # https://github.com/hayatroid/manifest/blob/main/cert-manager/base/cluster-issuer.yaml
+    cert-manager.io/cluster-issuer: cluster-issuer
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: cd.hayatro.id
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: argocd-server
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - cd.hayatro.id
+      secretName: cd-hayatro-id-tls

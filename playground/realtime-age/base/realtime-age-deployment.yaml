@@ -18,7 +18,11 @@ spec:
             name: realtime-age-html
       containers:
         - name: caddy
-          image: caddy:2
+          image: caddy:2.9
           volumeMounts:
-            - mountPath: /usr/share/caddy
-              name: realtime-age-html
+            - name: realtime-age-html
+              mountPath: /usr/share/caddy
+          resources:
+            limits:
+              memory: "64Mi"
+              cpu: "100m"

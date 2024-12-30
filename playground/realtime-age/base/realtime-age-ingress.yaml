@@ -5,6 +5,7 @@ metadata:
   annotations:
     # https://github.com/hayatroid/manifest/blob/main/cert-manager/base/cluster-issuer.yaml
     cert-manager.io/cluster-issuer: cluster-issuer
+    # https://github.com/hayatroid/manifest/blob/main/playground/strip-prefix.yaml
     traefik.ingress.kubernetes.io/router.middlewares: playground-strip-prefix@kubernetescrd
 spec:
   ingressClassName: traefik

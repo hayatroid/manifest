@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: caddy
+  name: deployment
 spec:
   replicas: 1
   selector:
@@ -13,14 +13,14 @@ spec:
         app: caddy
     spec:
       volumes:
-        - name: realtime-age-html
+        - name: data
           configMap:
-            name: realtime-age-html
+            name: data
       containers:
         - name: caddy
           image: caddy:2.9
           volumeMounts:
-            - name: realtime-age-html
+            - name: data
               mountPath: /usr/share/caddy
           resources:
             limits:

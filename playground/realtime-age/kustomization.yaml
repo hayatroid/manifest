@@ -2,9 +2,10 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 namespace: realtime-age
+namePrefix: realtime-age-
 
 resources:
-  - base/realtime-age-html.yaml
-  - base/realtime-age-deployment.yaml
-  - base/realtime-age-service.yaml
-  - base/realtime-age-ingress.yaml
+  - base/data.yaml
+  - base/deployment.yaml
+  - base/service.yaml
+  - base/ingress.yaml

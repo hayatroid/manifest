@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: caddy
+  name: ingress
   annotations:
     # https://github.com/hayatroid/manifest/blob/main/cert-manager/base/cluster-issuer.yaml
     cert-manager.io/cluster-issuer: cluster-issuer
@@ -17,7 +17,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: caddy
+                name: service
                 port:
                   number: 80
   tls:

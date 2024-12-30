@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: realtime-age-html
+  name: data
 data:
   index.html: |
     <!DOCTYPE html>

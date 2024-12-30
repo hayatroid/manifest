@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: argocd
+  name: argocd-ingress
   annotations:
     # https://github.com/hayatroid/manifest/blob/main/cert-manager/base/cluster-issuer.yaml
     cert-manager.io/cluster-issuer: cluster-issuer

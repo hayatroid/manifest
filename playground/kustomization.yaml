@@ -4,4 +4,4 @@ kind: Kustomization
 namespace: playground
 
 resources:
-  - strip-prefix.yaml
+  - middleware.yaml

@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: data
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Progress of 2025</title>
+        <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.13/dayjs.min.js"></script>
+        <style>
+            body {
+                font-family: Helvetica, Arial, sans-serif;
+                margin: 0;
+                padding: 20px;
+                background-color: #f4f4f9;
+                text-align: center;
+            }
+    
+            h1 {
+                color: #333;
+            }
+    
+            #txt {
+                font-size: 24px;
+                color: #007acc;
+                margin-top: 20px;
+            }
+    
+            progress {
+                width: 100%;
+                height: 30px;
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <h1>Progress of 2025</h1>
+        <div id="txt">Progress of 2025 will appear here.</div>
+        <progress id="bar" value="0"></progress>
+    
+        <script>
+            const txt = document.getElementById('txt');
+            const bar = document.getElementById('bar');
+            const startOfYear = dayjs('2025-01-01');
+    
+            const updateProgress = () => {
+                const now = dayjs();
+                const progress = now.diff(startOfYear, 'year', true).toFixed(9);
+                txt.textContent = `${(progress * 100).toFixed(7)}% of 2025 has passed.`;
+                bar.value = progress;
+            };
+    
+            setInterval(updateProgress);
+        </script>
+    </body>
+    
+    </html>

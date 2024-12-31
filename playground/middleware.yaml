@@ -5,4 +5,5 @@ metadata:
 spec:
   stripPrefix:
     prefixes:
+      - /progress-2025
       - /realtime-age

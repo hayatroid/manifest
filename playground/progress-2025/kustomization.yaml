@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: progress-2025
+namePrefix: progress-2025-
+
+resources:
+  - base/data.yaml
+  - base/deployment.yaml
+  - base/service.yaml
+  - base/ingress.yaml

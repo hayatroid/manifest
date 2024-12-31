@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: secret-message
+namePrefix: secret-message-
+
+resources:
+  - base/sealed-secret.yaml
+  - base/deployment.yaml
+  - base/service.yaml
+  - base/ingress.yaml

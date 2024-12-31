@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+  annotations:
+    # https://github.com/hayatroid/manifest/blob/main/cert-manager/base/cluster-issuer.yaml
+    cert-manager.io/cluster-issuer: cluster-issuer
+    # https://github.com/hayatroid/manifest/blob/main/playground/middleware.yaml
+    traefik.ingress.kubernetes.io/router.middlewares: playground-middleware@kubernetescrd
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: play.hayatro.id
+      http:
+        paths:
+          - path: /secret-message
+            pathType: Prefix
+            backend:
+              service:
+                name: service
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - play.hayatro.id
+      secretName: play-hayatro-id-tls

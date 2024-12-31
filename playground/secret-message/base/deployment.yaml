@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: caddy
+  template:
+    metadata:
+      labels:
+        app: caddy
+    spec:
+      volumes:
+        - name: message
+          secret:
+            secretName: message
+      containers:
+        - name: caddy
+          image: caddy:2.9
+          volumeMounts:
+            - name: message
+              mountPath: /usr/share/caddy
+          resources:
+            limits:
+              memory: 64Mi
+              cpu: 100m

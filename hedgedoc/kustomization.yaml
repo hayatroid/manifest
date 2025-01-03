@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: hedgedoc
+namePrefix: hedgedoc-
+
+resources:
+  - base/sealed-secret.yaml
+  - base/pvc-database.yaml
+  - base/pvc-uploads.yaml
+  - base/db-deployment.yaml
+  - base/db-service.yaml
+  - base/deployment.yaml
+  - base/service.yaml
+  - base/ingress.yaml

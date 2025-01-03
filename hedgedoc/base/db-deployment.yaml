@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: database
+  template:
+    metadata:
+      labels:
+        app: database
+    spec:
+      containers:
+        - envFrom:
+            - secretRef:
+                name: hedgedoc-secret
+          image: postgres:13.4-alpine
+          name: database
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: database
+          resources:
+            limits:
+              memory: 256Mi
+              cpu: 500m
+      volumes:
+        - name: database
+          persistentVolumeClaim:
+            claimName: hedgedoc-database

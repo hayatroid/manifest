@@ -15,8 +15,10 @@ jobs:
           - portainer
     steps:
       - uses: actions/checkout@v5
-      - run: |
+      - env:
+          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
+        run: |
           cd ${{ matrix.package }}
           docker compose pull
-          docker compose up --detach --remove-orphans
+          sops exec-env ../.enc.env "docker compose up --detach --remove-orphans"
           docker image prune --force

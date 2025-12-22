@@ -1,0 +1,30 @@
+#ref: https://docs.hedgedoc.org/setup/docker/#hedgedoc-docker-image
+
+services:
+  database:
+    image: postgres:17.7-alpine
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+    volumes:
+      - database:/var/lib/postgresql/data
+    restart: always
+  app:
+    # Make sure to use the latest release from https://hedgedoc.org/latest-release
+    image: quay.io/hedgedoc/hedgedoc:1.10.5
+    environment:
+      - CMD_DB_URL
+      - CMD_DOMAIN=md.hayatro.id
+      - CMD_PROTOCOL_USESSL=true
+      - CMD_URL_ADDPORT=false
+    volumes:
+      - uploads:/hedgedoc/public/uploads
+    ports:
+      - "3000:3000"
+    restart: always
+    depends_on:
+      - database
+volumes:
+  database:
+  uploads:

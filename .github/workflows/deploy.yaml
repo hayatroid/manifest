@@ -13,6 +13,7 @@ jobs:
       matrix:
         package:
           - portainer
+          - hedgedoc
     steps:
       - uses: actions/checkout@v5
       - env:

@@ -1,0 +1,22 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    strategy:
+      matrix:
+        package:
+          - portainer
+    steps:
+      - uses: actions/checkout@v5
+      - run: |
+          cd ${{ matrix.package }}
+          docker compose pull
+          docker compose up --detach --remove-orphans
+          docker image prune --force

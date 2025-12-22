@@ -1,0 +1,9 @@
+#ref: https://dozzle.dev/guide/getting-started#standalone-docker
+
+services:
+  dozzle:
+    image: amir20/dozzle:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 8080:8080

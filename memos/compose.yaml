@@ -1,14 +1,24 @@
+# ref: https://usememos.com/docs/installation/docker#postgresql
+
 services:
+  memos-postgres:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=${MEMOS_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${MEMOS_POSTGRES_PASSWORD}
+      - POSTGRES_DB=${MEMOS_POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
   memos:
     image: neosmemo/memos:stable
-    container_name: memos
+    depends_on:
+      - memos-postgres
+    environment:
+      - MEMOS_DRIVER=postgres
+      - MEMOS_DSN=${MEMOS_DSN}
     ports:
       - "5230:5230"
-    volumes:
-      - ./memos:/var/opt/memos
-    environment:
-      - MEMOS_MODE=prod
-      - MEMOS_ADDR=0.0.0.0
-      - MEMOS_PORT=5230
-      - MEMOS_DATA=/var/opt/memos
-    restart: unless-stopped
+
+volumes:
+  postgres_data:

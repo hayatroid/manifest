@@ -1,12 +1,12 @@
 #ref: https://docs.hedgedoc.org/setup/docker/#hedgedoc-docker-image
 
 services:
-  database:
+  hedgedoc-postgres:
     image: postgres:17.7-alpine
     environment:
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
-      - POSTGRES_DB
+      - POSTGRES_USER=${HEDGEDOC_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${HEDGEDOC_POSTGRES_PASSWORD}
+      - POSTGRES_DB=${HEDGEDOC_POSTGRES_DB}
     volumes:
       - database:/var/lib/postgresql/data
     restart: always
@@ -14,7 +14,7 @@ services:
     # Make sure to use the latest release from https://hedgedoc.org/latest-release
     image: quay.io/hedgedoc/hedgedoc:1.10.5
     environment:
-      - CMD_DB_URL
+      - CMD_DB_URL=${HEDGEDOC_DSN}
       - CMD_DOMAIN=md.hayatro.id
       - CMD_PROTOCOL_USESSL=true
       - CMD_URL_ADDPORT=false
@@ -24,7 +24,7 @@ services:
       - "3000:3000"
     restart: always
     depends_on:
-      - database
+      - hedgedoc-postgres
 volumes:
   database:
   uploads:

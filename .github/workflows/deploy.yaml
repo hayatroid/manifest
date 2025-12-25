@@ -22,6 +22,8 @@ jobs:
           SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
         run: |
           cd ${{ matrix.package }}
+          sops -d ../.enc.env > .env
           docker compose pull
-          sops exec-env ../.enc.env "docker compose up --detach --remove-orphans"
+          docker compose up --detach --remove-orphans
           docker image prune --force
+          rm .env

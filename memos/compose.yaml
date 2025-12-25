@@ -9,6 +9,7 @@ services:
       - POSTGRES_DB=${MEMOS_POSTGRES_DB}
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
 
   memos:
     image: neosmemo/memos:stable
@@ -18,7 +19,8 @@ services:
       - MEMOS_DRIVER=postgres
       - MEMOS_DSN=${MEMOS_DSN}
     ports:
-      - "5230:5230"
+      - 3003:5230
+    restart: unless-stopped
 
 volumes:
   postgres_data:

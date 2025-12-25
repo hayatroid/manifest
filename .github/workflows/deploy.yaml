@@ -15,6 +15,7 @@ jobs:
           - portainer
           - hedgedoc
           - dozzle
+          - memos
     steps:
       - uses: actions/checkout@v5
       - env:
